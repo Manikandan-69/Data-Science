@@ -30,7 +30,9 @@ def mean_wage_club(df, club):
 
 # Function to find common players between a club and a country
 def common_players(df, club, country):
-    common_players = df[(df['Club'] == club) & (df['Nationality'] == country)]['Name']
+    club_players = df[df['Club'] == club]
+    country_players = df[df['Nationality'] == country]
+    common_players = set(club_players['Name']).intersection(set(country_players['Name']))
     return list(common_players)
 
 # Main function to load data, perform tests, and return formatted results
@@ -49,6 +51,6 @@ def main(df, country_name, club_name):
     print([", ".join(common_players_list), round(mean_country_overall, 2), round(mean_club_wage, 2)])
 
 if __name__ == "__main__":
-    df = pd.read_csv('C:/Users\ManiKandan/OneDrive/AIML/AIML-1/IIT Kharagpur/Week 12/Additional_Programming_Assignment_1/data.csv').head(100)
+    df = pd.read_csv('C:/Users/ManiKandan/OneDrive/AIML/AIML/IIT Kharagpur/Week 13/Additional_Programming_Assignment_1/data.csv').head(100)
     result = main(df, sys.argv[1], sys.argv[2])
 
